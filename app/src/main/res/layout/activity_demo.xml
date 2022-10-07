@@ -6,14 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".DemoActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Demo Activity"
-        android:textSize= "34sp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Demo Activity"
+            android:layout_margin ="16dp"
+            android:textSize = "34sp"
+            android:gravity = "center"/>
+
+        <Button
+            android:id="@+id/buttonStartMainActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Main Activity" />
+
+        <Button
+            android:id="@+id/buttonStartDemoActivity2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Demo Activity 2" />
+
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

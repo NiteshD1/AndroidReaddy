@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".DemoActivity2">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Main Activity"
+            android:text="Demo Activity 2"
             android:layout_margin ="16dp"
             android:textSize = "34sp"
             android:gravity = "center"/>
@@ -33,10 +32,16 @@
             android:text="Start Demo Activity" />
 
         <Button
+            android:id="@+id/buttonStartMainActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Main Activity" />
+        <Button
             android:id="@+id/buttonStartDemoActivity2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start Demo Activity 2" />
+
 
 
     </LinearLayout>
