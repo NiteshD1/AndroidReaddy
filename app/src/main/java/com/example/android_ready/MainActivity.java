@@ -1,4 +1,4 @@
-package com.example.androidreadyconceptdemo;
+package com.example.android_ready;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.androidreadyconceptdemo.databinding.ActivityMainBinding;
+import com.example.android_ready.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

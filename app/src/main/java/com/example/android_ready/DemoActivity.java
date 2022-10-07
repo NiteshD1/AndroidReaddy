@@ -1,12 +1,11 @@
-package com.example.androidreadyconceptdemo;
+package com.example.android_ready;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.example.androidreadyconceptdemo.Utils.Utils;
+import com.example.android_ready.Utils.Utils;
 
 public class DemoActivity extends AppCompatActivity {
 
@@ -17,7 +16,7 @@ public class DemoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if(intent != null){
+        if(intent != null && intent.getExtras() != null){
             String message = intent.getExtras().getString(Intent.EXTRA_TEXT);
             Utils.showToast(message);
         }

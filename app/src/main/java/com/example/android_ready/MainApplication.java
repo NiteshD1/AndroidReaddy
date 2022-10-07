@@ -1,4 +1,4 @@
-package com.example.androidreadyconceptdemo;
+package com.example.android_ready;
 
 import android.app.Application;
 import android.content.Context;

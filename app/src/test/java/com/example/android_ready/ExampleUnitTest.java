@@ -1,4 +1,4 @@
-package com.example.androidreadyconceptdemo;
+package com.example.android_ready;
 
 import org.junit.Test;
 

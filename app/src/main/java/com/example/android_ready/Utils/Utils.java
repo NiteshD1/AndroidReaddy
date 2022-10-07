@@ -1,8 +1,8 @@
-package com.example.androidreadyconceptdemo.Utils;
+package com.example.android_ready.Utils;
 
 import android.widget.Toast;
 
-import com.example.androidreadyconceptdemo.MainApplication;
+import com.example.android_ready.MainApplication;
 
 
 public class Utils {
