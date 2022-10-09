@@ -18,28 +18,26 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/buttonStartDemoActivity"
+            android:id="@+id/buttonSendDataWithIntentOnly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Demo Activity" />
-
+            android:text="Send Data With Intent Only" />
         <Button
-            android:id="@+id/buttonOperUrl"
+            android:id="@+id/buttonSendDataWithBundle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Open Url" />
-
+            android:text="Send Data With Bundle" />
         <Button
-            android:id="@+id/buttonOpenDialer"
+            android:id="@+id/buttonSendCustomObjectWithSerializable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Call" />
-
+            android:text="Send Custom Object With Serializable" />
         <Button
-            android:id="@+id/buttonSendText"
+            android:id="@+id/buttonSendCustomObjectWithParcelable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Send Text" />
+            android:text="Send Custom Object With Parcelable" />
+
 
     </LinearLayout>
 

@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupButtons() {
-        binding.buttonStartDemoActivity.setOnClickListener(new View.OnClickListener() {
+        binding.buttonSendDataWithIntentOnly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,DemoActivity.class);
@@ -31,32 +31,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.buttonOperUrl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("http://www.google.com"));
-                startActivity(intent);
-            }
-        });
-
-        binding.buttonOpenDialer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:9898766567"));
-                startActivity(intent);
-            }
-        });
-
-        binding.buttonSendText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT,"Extra text from Main Activity");
-                startActivity(Intent.createChooser(intent,"Send text..."));
-            }
-        });
     }
 }
