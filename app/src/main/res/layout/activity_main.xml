@@ -38,7 +38,6 @@
             android:layout_height="wrap_content"
             android:text="Send Custom Object With Parcelable" />
 
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
