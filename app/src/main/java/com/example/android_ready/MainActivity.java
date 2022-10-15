@@ -1,7 +1,11 @@
 package com.example.android_ready;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -15,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     Intent intent;
+    RandomNumberGenerateService randomNumberGenerateService;
+    ServiceConnection serviceConnection;
+    boolean isBindedToService = false;
     ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
@@ -23,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        intent = new Intent(MainActivity.this, RandomNumberGenerateService.class);
         setupButtons();
 
     }
@@ -33,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Utils.print("Start Service Clicked");
-                intent = new Intent(MainActivity.this, RandomNumberGenerateService.class);
                 startService(intent);
             }
         });
@@ -43,6 +50,50 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(intent != null){
                     stopService(intent);
+                }
+            }
+        });
+
+        binding.buttonBindService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(serviceConnection == null){
+                    serviceConnection = new ServiceConnection() {
+                        @Override
+                        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                            RandomNumberGenerateService.ServiceBinder serviceBinder = (RandomNumberGenerateService.ServiceBinder) iBinder;
+                            randomNumberGenerateService = serviceBinder.getRandomNumberGenerateServiceObject();
+                            isBindedToService = true;
+                        }
+
+                        @Override
+                        public void onServiceDisconnected(ComponentName componentName) {
+                            isBindedToService = false;
+                        }
+                    };
+                }
+                bindService(intent,serviceConnection, Context.BIND_AUTO_CREATE);
+            }
+        });
+
+        binding.buttonUnbindService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isBindedToService){
+                    unbindService(serviceConnection);
+                    isBindedToService = false;
+                }
+            }
+        });
+
+        binding.buttonGetRandomNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.print("inside Get Random Number");
+                if(randomNumberGenerateService != null){
+                    Utils.print("inside Get Random Number");
+                    int randomNumber = randomNumberGenerateService.getRandomNumber();
+                    binding.textView.setText("Random Number : " +String.valueOf(randomNumber));
                 }
             }
         });

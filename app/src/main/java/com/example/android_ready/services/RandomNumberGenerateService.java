@@ -2,6 +2,7 @@ package com.example.android_ready.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,8 @@ import java.util.Random;
 public class RandomNumberGenerateService extends Service {
 
     boolean shouldGenerateRandomNumber = false;
+    int currentRandomNumber = -2;
+    IBinder iBinder;
 
     @Override
     public void onCreate() {
@@ -27,6 +30,7 @@ public class RandomNumberGenerateService extends Service {
         Utils.print("generateRandomNumber called");
         while (shouldGenerateRandomNumber){
             int randomNumber = new Random().nextInt(100);
+            currentRandomNumber = randomNumber;
             Utils.print(randomNumber);
 
             try {
@@ -50,12 +54,29 @@ public class RandomNumberGenerateService extends Service {
         return START_STICKY;
     }
 
+    public int getRandomNumber() {
+        return currentRandomNumber;
+    }
+
+    public class ServiceBinder extends Binder{
+        public RandomNumberGenerateService getRandomNumberGenerateServiceObject(){
+            return RandomNumberGenerateService.this;
+        }
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         Utils.print("Service onBind Called");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                generateRandomNumber();
+            }
+        }).start();
 
-        return null;
+        iBinder = new ServiceBinder();
+        return iBinder;
     }
 
     @Override
