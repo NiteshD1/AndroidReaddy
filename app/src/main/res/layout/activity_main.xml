@@ -17,26 +17,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:layout_marginBottom="32dp" />
+
         <Button
-            android:id="@+id/buttonSendDataWithIntentOnly"
+            android:id="@+id/buttonStartService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Send Data With Intent Only" />
+            android:text="@string/start_background_service" />
         <Button
-            android:id="@+id/buttonSendDataWithBundle"
+            android:id="@+id/buttonStopService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Send Data With Bundle" />
-        <Button
-            android:id="@+id/buttonSendCustomObjectWithSerializable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Send Custom Object With Serializable" />
-        <Button
-            android:id="@+id/buttonSendCustomObjectWithParcelable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Send Custom Object With Parcelable" />
+            android:text="@string/stop_service" />
+
 
     </LinearLayout>
 
