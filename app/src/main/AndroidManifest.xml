@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.RandomNumberGenerateService"/>
         <activity
             android:name="com.example.android_ready.MainActivity"
             android:exported="true">
@@ -30,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".service.MyService"/>
     </application>
 
 </manifest>

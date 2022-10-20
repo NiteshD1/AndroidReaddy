@@ -17,14 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            android:layout_marginBottom="32dp" />
 
         <Button
             android:id="@+id/buttonStartService"
