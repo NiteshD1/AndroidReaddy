@@ -12,7 +12,7 @@ import com.example.android_ready.utils.Utils;
 import java.util.Random;
 
 
-public class RandomNumberGenerateService extends Service {
+public class MyService extends Service {
 
     boolean shouldGenerateRandomNumber = false;
     int currentRandomNumber = -2;
@@ -59,8 +59,8 @@ public class RandomNumberGenerateService extends Service {
     }
 
     public class ServiceBinder extends Binder{
-        public RandomNumberGenerateService getRandomNumberGenerateServiceObject(){
-            return RandomNumberGenerateService.this;
+        public MyService getRandomNumberGenerateServiceObject(){
+            return MyService.this;
         }
     }
 

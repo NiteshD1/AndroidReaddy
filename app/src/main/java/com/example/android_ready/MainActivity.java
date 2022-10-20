@@ -12,14 +12,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android_ready.databinding.ActivityMainBinding;
-import com.example.android_ready.services.RandomNumberGenerateService;
+import com.example.android_ready.services.MyService;
 import com.example.android_ready.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     Intent intent;
-    RandomNumberGenerateService randomNumberGenerateService;
+    MyService myService;
     ServiceConnection serviceConnection;
     boolean isBindedToService = false;
     ActivityResultLauncher<Intent> activityResultLauncher;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        intent = new Intent(MainActivity.this, RandomNumberGenerateService.class);
+        intent = new Intent(MainActivity.this, MyService.class);
         setupButtons();
 
     }
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     serviceConnection = new ServiceConnection() {
                         @Override
                         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                            RandomNumberGenerateService.ServiceBinder serviceBinder = (RandomNumberGenerateService.ServiceBinder) iBinder;
-                            randomNumberGenerateService = serviceBinder.getRandomNumberGenerateServiceObject();
+                            MyService.ServiceBinder serviceBinder = (MyService.ServiceBinder) iBinder;
+                            myService = serviceBinder.getRandomNumberGenerateServiceObject();
                             isBindedToService = true;
                         }
 
@@ -90,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Utils.print("inside Get Random Number");
-                if(randomNumberGenerateService != null){
+                if(myService != null){
                     Utils.print("inside Get Random Number");
-                    int randomNumber = randomNumberGenerateService.getRandomNumber();
+                    int randomNumber = myService.getRandomNumber();
                     binding.textView.setText("Random Number : " +String.valueOf(randomNumber));
                 }
             }
