@@ -67,7 +67,7 @@ public class MyService extends Service {
                         .setContentIntent(pendingIntent)
                         .build();
 
-// Notification ID cannot be 0.
+        // Notification ID cannot be 0.
         startForeground(1, notification);
         new Thread(new Runnable() {
             @Override
