@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     Intent intent;
+    private ServiceConnection serviceConnection;
+    private boolean isBoundToService = false;
+    MyService myService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.buttonBindService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                if(serviceConnection == null){
+                    serviceConnection = new ServiceConnection() {
+                        @Override
+                        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                            isBoundToService = true;
+                            MyService.ServiceBinder serviceBinder = (MyService.ServiceBinder) iBinder;
+                            myService = serviceBinder.getMyServiceInstance();
+                        }
+
+                        @Override
+                        public void onServiceDisconnected(ComponentName componentName) {
+                            isBoundToService = false;
+
+                        }
+                    };
+                }
+                bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
+            }
+        });
+
+        binding.buttonUnbindService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isBoundToService){
+                    unbindService(serviceConnection);
+                    isBoundToService = false;
+                }
+            }
+        });
+
+        binding.buttonGetRandomNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(myService != null){
+                    int currentRandomNumber = myService.getCurrentRandomNumber();
+                    binding.textView.setText(String.valueOf(currentRandomNumber));
+                }
+
+            }
+        });
 
     }
 }
