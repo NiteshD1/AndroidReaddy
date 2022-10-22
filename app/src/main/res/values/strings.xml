@@ -2,4 +2,6 @@
     <string name="app_name">Android Ready Concept Demo</string>
     <string name="start_background_service">Start Background Service</string>
     <string name="stop_service">Stop Service</string>
+    <string name="start_bound_service">Start Bound Service</string>
+    <string name="start_service">Start Service</string>
 </resources>

@@ -31,7 +31,7 @@
             android:id="@+id/buttonStartService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/start_background_service" />
+            android:text="@string/start_service" />
         <Button
             android:id="@+id/buttonBindService"
             android:layout_width="match_parent"

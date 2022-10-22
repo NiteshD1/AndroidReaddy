@@ -15,8 +15,7 @@ import java.util.Random;
 public class MyService extends Service {
 
     boolean shouldGenerateRandomNumber = false;
-    int currentRandomNumber = -2;
-    IBinder iBinder;
+
 
     @Override
     public void onCreate() {
@@ -30,7 +29,6 @@ public class MyService extends Service {
         Utils.print("generateRandomNumber called");
         while (shouldGenerateRandomNumber){
             int randomNumber = new Random().nextInt(100);
-            currentRandomNumber = randomNumber;
             Utils.print(randomNumber);
 
             try {
@@ -54,29 +52,13 @@ public class MyService extends Service {
         return START_STICKY;
     }
 
-    public int getRandomNumber() {
-        return currentRandomNumber;
-    }
-
-    public class ServiceBinder extends Binder{
-        public MyService getRandomNumberGenerateServiceObject(){
-            return MyService.this;
-        }
-    }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         Utils.print("Service onBind Called");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                generateRandomNumber();
-            }
-        }).start();
 
-        iBinder = new ServiceBinder();
-        return iBinder;
+        return null;
     }
 
     @Override

@@ -19,10 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     Intent intent;
-    MyService myService;
-    ServiceConnection serviceConnection;
-    boolean isBindedToService = false;
-    ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,54 +44,11 @@ public class MainActivity extends AppCompatActivity {
         binding.buttonStopService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(intent != null){
                     stopService(intent);
-                }
             }
         });
 
-        binding.buttonBindService.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(serviceConnection == null){
-                    serviceConnection = new ServiceConnection() {
-                        @Override
-                        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                            MyService.ServiceBinder serviceBinder = (MyService.ServiceBinder) iBinder;
-                            myService = serviceBinder.getRandomNumberGenerateServiceObject();
-                            isBindedToService = true;
-                        }
 
-                        @Override
-                        public void onServiceDisconnected(ComponentName componentName) {
-                            isBindedToService = false;
-                        }
-                    };
-                }
-                bindService(intent,serviceConnection, Context.BIND_AUTO_CREATE);
-            }
-        });
 
-        binding.buttonUnbindService.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isBindedToService){
-                    unbindService(serviceConnection);
-                    isBindedToService = false;
-                }
-            }
-        });
-
-        binding.buttonGetRandomNumber.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utils.print("inside Get Random Number");
-                if(myService != null){
-                    Utils.print("inside Get Random Number");
-                    int randomNumber = myService.getRandomNumber();
-                    binding.textView.setText("Random Number : " +String.valueOf(randomNumber));
-                }
-            }
-        });
     }
 }
