@@ -8,11 +8,16 @@ import androidx.annotation.Nullable;
 
 import com.example.android_ready.utils.Utils;
 
+import java.util.Random;
+
 public class MyService extends Service {
+
+    boolean shouldGenerateRandomNumber = false;
 
     @Override
     public void onCreate() {
         Utils.print("Service OnCreate Called");
+        shouldGenerateRandomNumber = true;
         super.onCreate();
     }
 
@@ -20,7 +25,30 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Utils.print("Service onStartCommand Called");
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                generateRandomNumber();
+            }
+        }).start();
+
         return START_STICKY;
+    }
+
+    private void generateRandomNumber() {
+
+        while (shouldGenerateRandomNumber){
+            int randomNumber = new Random().nextInt(100);
+            Utils.print(randomNumber);
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     @Nullable
@@ -42,6 +70,7 @@ public class MyService extends Service {
     public void onDestroy() {
         Utils.print("Service onDestroy Called");
 
+        shouldGenerateRandomNumber = false;
         super.onDestroy();
     }
 }
