@@ -13,6 +13,8 @@ public class MyBroadCastReceiver extends BroadcastReceiver {
         if (intent.getAction() == Intent.ACTION_AIRPLANE_MODE_CHANGED){
             Utils.showToast("Airplane Mode Changed");
             Utils.print(intent);
+        }else if(intent.getAction() == "com.example.android_ready.MY_NOTIFICATION"){
+            Utils.showToast(intent.getStringExtra("data"));
         }
     }
 }

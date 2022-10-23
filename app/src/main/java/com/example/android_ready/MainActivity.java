@@ -26,6 +26,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.buttonSendBroadCast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction("com.example.android_ready.MY_NOTIFICATION");
+                intent.putExtra("data", "My Custom BroadCast...");
+                sendBroadcast(intent);
+            }
+        });
     }
 
     @Override

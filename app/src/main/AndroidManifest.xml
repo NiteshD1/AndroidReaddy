@@ -30,6 +30,9 @@
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.AIRPLANE_MODE" />-->
 <!--            </intent-filter>-->
+                <intent-filter>
+                    <action android:name="com.example.android_ready.MY_NOTIFICATION"/>
+                </intent-filter>
         </receiver>
 
     </application>

@@ -19,19 +19,10 @@
 
 
         <Button
-            android:id="@+id/buttonStartService"
+            android:id="@+id/buttonSendBroadCast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/start_fore_ground_service" />
-
-        <Button
-            android:id="@+id/buttonStopService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/stop_service" />
-
-
-
+            android:text="@string/send_custom_broadcast" />
 
     </LinearLayout>
 
