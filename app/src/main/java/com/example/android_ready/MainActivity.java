@@ -40,18 +40,17 @@ public class MainActivity extends AppCompatActivity {
                 Utils.print("Start Service Clicked");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     getApplicationContext().startForegroundService(intent);
-                }else {
+                }else{
                     startService(intent);
                 }
+
             }
         });
 
         binding.buttonStopService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(intent != null){
                     stopService(intent);
-                }
             }
         });
 

@@ -46,29 +46,23 @@ public class MyService extends Service {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Utils.print("Service onStartCommand Called");
 
-        Intent notificationIntent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = null;
+        Intent notificationIntent = new Intent(MyService.this,MainActivity.class);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,
-                    PendingIntent.FLAG_IMMUTABLE);
-        }
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,PendingIntent.FLAG_IMMUTABLE);
 
-        Notification notification =
-                new Notification.Builder(this)
-                        .setContentTitle(getText(R.string.notification_title))
-                        .setContentText(getText(R.string.notification_message))
-                        .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setContentIntent(pendingIntent)
-                        .build();
+        Notification notification = new Notification.Builder(this)
+                .setContentTitle(getString(R.string.notification_title))
+                .setContentText(getString(R.string.notification_message))
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentIntent(pendingIntent)
+                .build();
 
-        // Notification ID cannot be 0.
-        startForeground(1, notification);
+        startForeground(1,notification);
         new Thread(new Runnable() {
             @Override
             public void run() {
