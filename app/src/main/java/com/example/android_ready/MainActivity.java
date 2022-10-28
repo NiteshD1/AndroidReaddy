@@ -1,58 +1,59 @@
 package com.example.android_ready;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.os.Build;
+import android.content.ContentResolver;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.os.IBinder;
+import android.provider.ContactsContract;
 import android.view.View;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.MyBroadCastReceiver.MyBroadCastReceiver;
 import com.example.android_ready.databinding.ActivityMainBinding;
-import com.example.android_ready.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    MyBroadCastReceiver myReceiver;
+
+    private String[] mColumnProjection = new String[]{
+            ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,
+            ContactsContract.Contacts.HAS_PHONE_NUMBER};
+
+    private String selectionClause = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " = ?";
+
+    private String[] selectionArguments = new String[]{"Anil"};
+
+    private String orderBy = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.buttonSendBroadCast.setOnClickListener(new View.OnClickListener() {
+        binding.buttonGetContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction("com.example.android_ready.MY_NOTIFICATION");
-                intent.putExtra("data", "My Custom BroadCast...");
-                sendBroadcast(intent);
+                getContacts();
             }
         });
     }
 
-    @Override
-    protected void onStart() {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("android.intent.action.AIRPLANE_MODE");
-
-        myReceiver = new MyBroadCastReceiver();
-        registerReceiver(myReceiver, intentFilter);
-
-        super.onStart();
+    private void getContacts() {
+        ContentResolver contentResolver=getContentResolver();
+        Cursor cursor=contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
+                mColumnProjection,
+                selectionClause,
+                selectionArguments,
+                orderBy);
+        if(cursor!=null && cursor.getCount()>0){
+            StringBuilder stringBuilderQueryResult=new StringBuilder("");
+            while (cursor.moveToNext()){
+                stringBuilderQueryResult.append(cursor.getString(0)+" , "+cursor.getString(1)+"\n");
+            }
+            binding.textViewContacts.setText(stringBuilderQueryResult.toString());
+        }else{
+            binding.textViewContacts.setText("No Contacts in device");
+        }
     }
 
-    @Override
-    protected void onStop() {
-
-        unregisterReceiver(myReceiver);
-        super.onStop();
-    }
 }
