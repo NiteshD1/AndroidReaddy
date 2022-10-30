@@ -23,6 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:layout_margin="8dp"
             android:text="TextView" />
 
@@ -31,6 +33,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/get_contacts" />
+        <Button
+            android:id="@+id/buttonRequestPermission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/request_permission" />
+
 
     </LinearLayout>
 

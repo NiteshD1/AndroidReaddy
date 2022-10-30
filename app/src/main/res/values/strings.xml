@@ -8,4 +8,5 @@
     <string name="start_fore_ground_service">Start ForeGround Service</string>
     <string name="send_custom_broadcast">Send Custom BroadCast</string>
     <string name="get_contacts">Get Contacts</string>
+    <string name="request_permission">Request Permission</string>
 </resources>
