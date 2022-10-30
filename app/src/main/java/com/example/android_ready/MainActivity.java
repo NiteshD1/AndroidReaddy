@@ -13,14 +13,14 @@ import android.view.View;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.MyBroadCastReceiver.MyBroadCastReceiver;
 import com.example.android_ready.databinding.ActivityMainBinding;
+import com.example.android_ready.receiver.MyBroadcastReceiver;
 import com.example.android_ready.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    MyBroadCastReceiver myReceiver;
+    MyBroadcastReceiver myBroadcastReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,27 +32,28 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction("com.example.android_ready.MY_NOTIFICATION");
-                intent.putExtra("data", "My Custom BroadCast...");
+                intent.putExtra("data","My Custom BroadCast Receiver");
                 sendBroadcast(intent);
             }
         });
+
     }
 
     @Override
     protected void onStart() {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("android.intent.action.AIRPLANE_MODE");
-
-        myReceiver = new MyBroadCastReceiver();
-        registerReceiver(myReceiver, intentFilter);
+//        IntentFilter intentFilter = new IntentFilter();
+//        intentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+//
+//        myBroadcastReceiver = new MyBroadcastReceiver();
+//
+//        registerReceiver(myBroadcastReceiver,intentFilter);
 
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-
-        unregisterReceiver(myReceiver);
+        //unregisterReceiver(myBroadcastReceiver);
         super.onStop();
     }
 }
