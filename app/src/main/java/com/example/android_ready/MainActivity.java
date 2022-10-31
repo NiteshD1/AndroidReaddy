@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         binding.buttonRequestPermission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,22 +54,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getContacts() {
-        ContentResolver contentResolver=getContentResolver();
-        Cursor cursor=contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
+        ContentResolver contentResolver = getContentResolver();
+
+        Cursor cursor = contentResolver.query(
+                ContactsContract.Contacts.CONTENT_URI,
                 mColumnProjection,
-                selectionClause,
-                selectionArguments,
-                orderBy);
-        if(cursor!=null && cursor.getCount()>0){
-            StringBuilder stringBuilderQueryResult=new StringBuilder("");
+                null,
+                null,
+                null
+        );
+
+        if(cursor != null && cursor.getCount() >0){
+            StringBuilder stringBuilder = new StringBuilder("");
+
             while (cursor.moveToNext()){
-                stringBuilderQueryResult.append(cursor.getString(0)+" , "+cursor.getString(1)+"\n");
+                stringBuilder.append(cursor.getString(0) + " ," + cursor.getString(1) + "\n");
             }
-            binding.textViewContacts.setText(stringBuilderQueryResult.toString());
+            binding.textViewContacts.setText(stringBuilder);
+
         }else{
-            binding.textViewContacts.setText("No Contacts in device");
+            binding.textViewContacts.setText("No contacts data available.");
         }
     }
+
 
     // Function to check and request permission.
     public void checkPermission(String permission, int requestCode)
